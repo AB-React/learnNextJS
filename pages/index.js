@@ -40,7 +40,9 @@ export async function getServerSideProps(context) {
   const req = context.req;
   const res = context.res;
   return {
-    props: DUMMY_MEETUPS,
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
   };
 }
 
