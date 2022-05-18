@@ -28,6 +28,9 @@ export async function getStaticProps() {
     props: {
       meetups: DUMMY_MEETUPS,
     },
+    // using revalidate will make the server side re-render a new static
+    // if the request is more than 10 seconds old from the previous request.
+    revalidate: 10,
   };
 }
 
