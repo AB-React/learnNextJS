@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -21,11 +20,18 @@ const DUMMY_MEETUPS = [
 ];
 
 const HomePage = (props) => {
-  const [loadedMeetups, setLoadedMeetups] = useState([]);
-  useEffect(() => {
-    setLoadedMeetups(DUMMY_MEETUPS);
-  }, []);
-  return <MeetupList meetups={loadedMeetups} />;
+  return <MeetupList meetups={props.meetups} />;
 };
+
+export async function getStaticProps() {
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    // using revalidate will make the server side re-render a new static
+    // if the request is more than 10 seconds old from the previous request.
+    revalidate: 10,
+  };
+}
 
 export default HomePage;
